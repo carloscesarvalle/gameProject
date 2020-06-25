@@ -101,7 +101,7 @@ function turnIntoCoffeeCup(){
     })
     
 }
-//not working --- need help
+//not working --- need helpppppppp
 function whenCoffeeCupTouchesGhost(){
     coffeeCups.forEach((coffeeCup,i) => {
         if (coffeeCup.x < oneSleepyGhost.x + oneSleepyGhost.width &&
