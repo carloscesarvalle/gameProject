@@ -61,7 +61,7 @@ function drawSleepyGhosts() {
     })
 }
 
-//Collision --- when coffeeMagician touches the ghost
+//Collision --- when coffeeMagician touches the ghost one time
 
 
 let coffeeCups =[]
