@@ -1,0 +1,14 @@
+body {
+    position: fixed;
+    margin: 0;
+}
+
+footer {
+    width: 700px;
+    background-color: blue;
+    display: flex;
+}
+
+.footerElement {
+    justify-content: space-evenly;
+}

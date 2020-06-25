@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page for Coffe Magician Game</title>
+</head>
+<body>
+    <h1>Welcome to Coffee Magician!</h1>
+    <p>Are you ready to wake up?</p>
+    <p>Touch the sleepy ghosts to turn them into coffee cups, don let them run away!</p>
+    <button>Start</button>
+    <script>  
+        document.querySelector("button").onclick=function(){
+          window.location.href="index.html"
+        }
+    </script>
+</body>
+</html>
+
+<asp:Button ID="Button1" runat="server" Text="Button"  OnClientClick="javascript:alert('Page will redirected to another page');window.location.href='YourPage.aspx'; return false;" />
