@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Page for Coffe Magician Game</title>
+    <link rel="stylesheet" href="welcomepage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="hero-image">
     <h1>Welcome to Coffee Magician!</h1>
     <p>Are you ready to wake up?</p>
     <p>Touch the sleepy ghosts to turn them into coffee cups, don let them run away!</p>
     <button>Start</button>
     <script>  
         document.querySelector("button").onclick=function(){
-          window.location.href="index.html"
+          window.location.href="canvas.html"
         }
     </script>
 </body>
 </html>
 
-<asp:Button ID="Button1" runat="server" Text="Button"  OnClientClick="javascript:alert('Page will redirected to another page');window.location.href='YourPage.aspx'; return false;" />

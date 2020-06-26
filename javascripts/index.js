@@ -12,7 +12,7 @@ let coffeeMagicianImage= new Image()
 coffeeMagicianImage.src = '../images/coffee-magician.jpg'
 
 let coffeeMagician = {
-    x:canvas.width/2,
+    x:canvas.width/3,
     y:canvas.height-180,
     width: 120,
     height: 150,
@@ -26,11 +26,15 @@ coffeeCup.src = '../images/coffee-cup.png'
 
 let lifeBar = 10
 
+let score = 0
+
 //Function drawBackground
 function drawBackground(){
-        ctx.drawImage(backgroundImage,0,0,canvas.width,canvas.height)
-        ctx.fillStyle = "black"
-        ctx.fillRect(0,canvas.height-30,canvas.width,30)
+        ctx.fillStyle = "white"
+        ctx.fillRect(0,0,canvas.width,canvas.height)
+        // ctx.drawImage(backgroundImage,0,0,canvas.width,canvas.height)
+        // ctx.fillStyle = "black"
+        // ctx.fillRect(0,canvas.height-30,canvas.width,30)
 }
 
 ///Function drawCoffeeMagician
@@ -47,11 +51,11 @@ setInterval (() => {
     let oneSleepyGhost = {
         x: (canvas.width-60)*Math.random(),
         y: 0,
-        width: 40,
-        height: 40,
+        width: 60,
+        height: 60,
     }
     sleepyGhosts.push(oneSleepyGhost)        
-}, 500)
+}, 1000)
 
 function drawSleepyGhosts() {
     
@@ -75,50 +79,84 @@ function magicTouch() {
         coffeeMagician.height + coffeeMagician.y > oneSleepyGhost.y) {
         coffeeCups.push(oneSleepyGhost)
         sleepyGhosts.splice(i,1)
+        score+=2
+        ctx.fillText = score
+        console.log(`Your score is ${score}`)
+        if (score ===100) {
+            window.location.href="winnerpage.html"
+        }
      }
      else if(oneSleepyGhost.y+oneSleepyGhost.height>=canvas.height){
         sleepyGhosts.splice(i,1)
          lifeBar--
          console.log(lifeBar)
          if(lifeBar===0){
-            //  alert('You felt asleep')
              window.cancelAnimationFrame(animationID)
-             window.location.href="welcomepage.html"
+             window.location.href="loserpage.html"
+             console.log(lifeBar)
             //  location.reload()
-
-         }
-         
-     }
+         }        
+        }
     })
-    
-    console.log(coffeeCups)
+    // console.log(coffeeCups)
 }
 
 function turnIntoCoffeeCup(){
-    coffeeCups.forEach(element=> {
-        ctx.drawImage(coffeeCup,element.x, element.y, element.width, element.height)
-        element.y--  
-    })
-    
+    coffeeCups.forEach((element,ind)=> {
+        ctx.drawImage(coffeeCup,element.x, element.y, element.width, element.height) 
+        if (element.y + element.height < 0) {
+            coffeeCups.slice(ind,1)
+        } else {
+            element.y--
+        }
+    }
+    )   
 }
-//not working --- need helpppppppp
+
+//Turn a sleepyGhost into a coffee cup when it touches a coffee cup
 function whenCoffeeCupTouchesGhost(){
-    coffeeCups.forEach((coffeeCup,i) => {
-        if (coffeeCup.x < oneSleepyGhost.x + oneSleepyGhost.width &&
-            coffeeCup.x + oneSleepyGhost.width > oneSleepyGhost.x &&
-            coffeeCup.y < oneSleepyGhost.y + oneSleepyGhost.height &&
-            coffeeCup.height + oneSleepyGhost.y > oneSleepyGhost.y) {
-                console.log('i turned this ghost into an alarm clock')
-            sleepyGhosts.splice(i,1)
-         }
-     })
+    coffeeCups.forEach((coffeeCup) => {
+        sleepyGhosts.forEach((oneSleepyGhost, i)=> {
+            if (coffeeCup.x < oneSleepyGhost.x + oneSleepyGhost.width &&
+                coffeeCup.x + oneSleepyGhost.width > oneSleepyGhost.x &&
+                coffeeCup.y < oneSleepyGhost.y + oneSleepyGhost.height &&
+                coffeeCup.height + oneSleepyGhost.y > oneSleepyGhost.y) {
+                coffeeCups.push(oneSleepyGhost)
+                sleepyGhosts.splice(i,1)
+                score+=2
+                console.log(`Your score is ${score}`)
+                if (score ===50) {
+                    window.location.href="winnerpage.html"
+                }
+            }
+        })              
+    })
 }
+
+
+//Draw the gray box on the right to display Score
+// function drawScorePanel(){
+//         ctx.fillStyle = 'grey'
+//         ctx.fillRect(canvas.width-500,0,500,canvas.width)
+// }
+//ctx.fillText gives me an error in the console "is not a function" WTH
+// function drawTextScore() {
+//     ctx.font = '48px serif';
+//     ctx.fillText('Hello world', 10, 50);
+//     ctx.font = '48px serif';
+//     ctx.strokeText('Hello world', 10, 100);
+//   }
+let scoreTotal = 0
+
+// function drawScore (){
+//     ctx.score.fillText('0',1665,200)
+// }
+
+
 
 
 
 //Loop to draw images on top of each other --- they trick the eye and create illusion of movement
-
-
 
 function animationLoop(){
     
@@ -130,6 +168,9 @@ function animationLoop(){
     drawSleepyGhosts()
     magicTouch()
     turnIntoCoffeeCup()
+    whenCoffeeCupTouchesGhost()
+    // drawScorePanel()
+    // drawTextScore()
        
 }
 
