@@ -1,0 +1,38 @@
+
+
+.hero-image {
+    background-image: url("../images/sleepy-little-girl-04.png"); 
+    background-color: #cccccc; 
+    height: 500px; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-family: 'Vollkorn', serif;
+    font-size: 46px;
+    color: #4966B2;
+  }
+
+  p{
+    font-family: 'Varela', sans-serif; 
+    font-size: 20px; 
+  }
+
+  button {
+        width: 180px;
+        background-color: orange;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        font-family: 'Varela', sans-serif;
+      }
+  }

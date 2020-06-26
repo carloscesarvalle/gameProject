@@ -19,7 +19,7 @@ let coffeeMagician = {
 }
 
 let sleepyGhost = new Image()
-sleepyGhost.src = '../images/sleepy-ghost.jpg'
+sleepyGhost.src = '../images/sleepy-ghost2.png'
 
 let coffeeCup = new Image()
 coffeeCup.src = '../images/coffee-cup.png'
@@ -28,13 +28,12 @@ let lifeBar = 10
 
 let score = 0
 
+let totalSleepyGhostTurned = 0
+
 //Function drawBackground
 function drawBackground(){
         ctx.fillStyle = "white"
         ctx.fillRect(0,0,canvas.width,canvas.height)
-        // ctx.drawImage(backgroundImage,0,0,canvas.width,canvas.height)
-        // ctx.fillStyle = "black"
-        // ctx.fillRect(0,canvas.height-30,canvas.width,30)
 }
 
 ///Function drawCoffeeMagician
@@ -70,7 +69,7 @@ function drawSleepyGhosts() {
 
 let coffeeCups =[]
 
-function magicTouch() {
+function magicTouch(){
 
     sleepyGhosts.forEach((oneSleepyGhost,i) => {
     if (coffeeMagician.x < oneSleepyGhost.x + oneSleepyGhost.width &&
@@ -80,8 +79,9 @@ function magicTouch() {
         coffeeCups.push(oneSleepyGhost)
         sleepyGhosts.splice(i,1)
         score+=2
-        ctx.fillText = score
-        console.log(`Your score is ${score}`)
+        document.querySelector("#total-score").innerText = score
+        totalSleepyGhostTurned+=1
+        document.querySelector("#total-sleepy-ghost-turned").innerText = totalSleepyGhostTurned
         if (score ===100) {
             window.location.href="winnerpage.html"
         }
@@ -89,11 +89,13 @@ function magicTouch() {
      else if(oneSleepyGhost.y+oneSleepyGhost.height>=canvas.height){
         sleepyGhosts.splice(i,1)
          lifeBar--
+         document.querySelector("#life-bar").innerText = lifeBar
+         document.querySelector("#total-score").innerText = score
          console.log(lifeBar)
          if(lifeBar===0){
              window.cancelAnimationFrame(animationID)
              window.location.href="loserpage.html"
-             console.log(lifeBar)
+            //  console.log(lifeBar)
             //  location.reload()
          }        
         }
@@ -123,9 +125,12 @@ function whenCoffeeCupTouchesGhost(){
                 coffeeCup.height + oneSleepyGhost.y > oneSleepyGhost.y) {
                 coffeeCups.push(oneSleepyGhost)
                 sleepyGhosts.splice(i,1)
-                score+=2
-                console.log(`Your score is ${score}`)
-                if (score ===50) {
+                score+=1
+                document.querySelector("#total-score").innerText = score
+                // console.log(`Your score is ${score}`)
+                totalSleepyGhostTurned+=1
+                document.querySelector("#total-sleepy-ghost-turned").innerText = totalSleepyGhostTurned
+                if (score ===100) {
                     window.location.href="winnerpage.html"
                 }
             }
@@ -146,7 +151,7 @@ function whenCoffeeCupTouchesGhost(){
 //     ctx.font = '48px serif';
 //     ctx.strokeText('Hello world', 10, 100);
 //   }
-let scoreTotal = 0
+// let scoreTotal = 0
 
 // function drawScore (){
 //     ctx.score.fillText('0',1665,200)
@@ -168,10 +173,7 @@ function animationLoop(){
     drawSleepyGhosts()
     magicTouch()
     turnIntoCoffeeCup()
-    whenCoffeeCupTouchesGhost()
-    // drawScorePanel()
-    // drawTextScore()
-       
+    whenCoffeeCupTouchesGhost()       
 }
 
 animationLoop()

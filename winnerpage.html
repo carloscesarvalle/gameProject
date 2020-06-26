@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width>, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style/winnerpage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
+    <title>Winner Page</title>
 </head>
-<body>
+<body class="hero-image">
     <h1>Yes!<br>You woke her up!</h1>
     <p> Wanna try again?</p>
-    <button id="yes">Yes</button>
-    <button id="no">No</button>
+    <div class = buttons-window>
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
     <script>  
         document.querySelector("#yes").onclick=function(){
           window.location.href="canvas.html"
